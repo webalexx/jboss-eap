@@ -1,0 +1,9 @@
+org\jboss\tools\examples\model\Member_.class
+org\jboss\tools\examples\rest\JaxRsActivator.class
+org\jboss\tools\examples\service\MemberRegistration.class
+org\jboss\tools\examples\util\Resources.class
+org\jboss\tools\examples\controller\MemberController.class
+org\jboss\tools\examples\model\Member.class
+org\jboss\tools\examples\data\MemberListProducer.class
+org\jboss\tools\examples\data\MemberRepository.class
+org\jboss\tools\examples\rest\MemberResourceRESTService.class

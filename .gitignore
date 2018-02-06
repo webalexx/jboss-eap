@@ -1,0 +1,9 @@
+/.metadata/
+/.recommenders/
+/RemoteSystemsTempFiles/
+/.examples/
+/.Samples/
+/target/
+*.project
+*.settings
+
