@@ -16,8 +16,6 @@
  */
 package org.jboss.tools.examples.rest;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,14 +44,19 @@ import org.jboss.tools.examples.data.MemberRepository;
 import org.jboss.tools.examples.model.Member;
 import org.jboss.tools.examples.service.MemberRegistration;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.modules.HelloWorldModule;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+//import com.modules.*;
 
 /**
  * JAX-RS Example
  * <p/>
  * This class produces a RESTful service to read/write the contents of the members table.
  */
+@Api
 @Path("/members")
 @RequestScoped
 public class MemberResourceRESTService {
@@ -71,9 +74,9 @@ public class MemberResourceRESTService {
     MemberRegistration registration;
     
   
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+   // @ApiOperation("Read the list of all members.")
     public List<Member> listAllMembers() {
         return repository.findAllOrderedByName();
     }
@@ -81,22 +84,28 @@ public class MemberResourceRESTService {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
+//    @ApiOperation("Look up one member by id.")
     public Member lookupMemberById(@PathParam("id") long id) {
+    	
     	/*JwtClaims claims = new JwtClaims();
     	JsonWebSignature jws = new JsonWebSignature();*/
-    	  Key key = keyGenerator.generateKey();
-    	String token = Jwts.builder()
-                .setSubject( id )
-                .claim( CLAIM_ROLE, role )
-                .setExpiration( toDate(LocalDateTime.now().plusMinutes(15L)) )
-                .setIssuer(uriInfo.getAbsolutePath().toString())
-                .setIssuedAt( Date.from( now ) )
-                .signWith(SignatureAlgorithm.HS512, key )
-                .compact();
+//    	  Key key = keyGenerator.generateKey();
+//    	String token = Jwts.builder()
+//                .setSubject( id )
+//                .claim( CLAIM_ROLE, role )
+//                .setExpiration( toDate(LocalDateTime.now().plusMinutes(15L)) )
+//                .setIssuer(uriInfo.getAbsolutePath().toString())
+//                .setIssuedAt( Date.from( now ) )
+//                .signWith(SignatureAlgorithm.HS512, key )
+//                .compact();
 //    		  return token;
     		  
     	
         Member member = repository.findById(id);
+                HelloWorldModule.sayHello();
+    	String helloGreeting = HelloWorldModule.returHello();
+        member.setName(member.getName() + "--//--" + helloGreeting);
+        
         if (member == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -110,6 +119,7 @@ public class MemberResourceRESTService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation("Create a member.")
     public Response createMember(Member member) {
 
         Response.ResponseBuilder builder = null;

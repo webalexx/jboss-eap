@@ -1,0 +1,90 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This interfaces provides consent information for\n\t\t\t\t\t\t\t\t\tusers enlisted in\n\t\t\t\t\t\t\t\t\tTokenmamanger to CCB for display. This\n\t\t\t\t\t\t\t\t\tincludes the\n\t\t\t\t\t\t\t\t\tcapabilities to read\n\t\t\t\t\t\t\t\t\tthe list of consents of a given\n\t\t\t\t\t\t\t\t\tuser as well as deleting them one\n\t\t\t\t\t\t\t\t\tby one.",
+    "version" : "0.0.1-SNAPSHOT",
+    "title" : "Consent Dashboard Interface"
+  },
+  "host" : "localhost:8444",
+  "basePath" : "/auth/realm/external",
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/members" : {
+      "get" : {
+        "operationId" : "listAllMembers",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Member"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a member.",
+        "description" : "",
+        "operationId" : "createMember",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/members/{id}" : {
+      "get" : {
+        "operationId" : "lookupMemberById",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "pattern" : "[0-9][0-9]*",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Member"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Member" : {
+      "type" : "object",
+      "required" : [ "email", "name", "phoneNumber" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 25,
+          "pattern" : "[^0-9]*"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string",
+          "minLength" : 10,
+          "maxLength" : 12
+        }
+      }
+    }
+  }
+}
