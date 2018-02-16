@@ -3,10 +3,9 @@
 /RemoteSystemsTempFiles/
 /.examples/
 /.Samples/
-/target/
-/tokenmanagement/
-*.project
+/target*.project
 *.settings
 *.classpath
 
 
+/.project
