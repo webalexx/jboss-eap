@@ -4,6 +4,7 @@
 /.examples/
 /.Samples/
 /target/
+/tokenmanagement/
 *.project
 *.settings
 *.classpath
