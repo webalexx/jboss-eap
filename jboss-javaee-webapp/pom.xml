@@ -258,7 +258,7 @@
 				<version>${version.wildfly.maven.plugin}</version>
 			</plugin>
 
-  			<plugin>
+<!--   			<plugin>
 				<groupId>com.github.kongchen</groupId>
 				<artifactId>swagger-maven-plugin</artifactId>
 				<version>3.1.6</version>
@@ -286,7 +286,7 @@
 								<scheme>http</scheme>
 								<scheme>https</scheme>
 							</schemes>
-							<host>localhost:8444</host>
+							<host>localhost:8080</host>
 							<basePath>/auth/realm/external</basePath>
 							<swaggerDirectory>${project.build.directory}/swagger</swaggerDirectory>
 							<attachSwaggerArtifact>true</attachSwaggerArtifact>
@@ -301,7 +301,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> 
+			</plugin> --> 
  		</plugins>
 	</build>
 

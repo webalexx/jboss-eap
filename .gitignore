@@ -3,9 +3,9 @@
 /RemoteSystemsTempFiles/
 /.examples/
 /.Samples/
-/target/
-*.project
+/target*.project
 *.settings
 *.classpath
 
 
+/.project
