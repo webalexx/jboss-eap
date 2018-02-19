@@ -1,4 +1,4 @@
-<module xmlns="urn:jboss:module:1.0" name="com.commerzunternahmen.tokenmanagement">
+<module xmlns="urn:jboss:module:1.0" name="com.commerzunternahmen.tokenmanagement-module">
     <resources>
         <resource-root path="tokenmanagement.jar"/>
     </resources>

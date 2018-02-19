@@ -1,0 +1,7 @@
+--- Programm argumetns ---
+
+-mp "C:\Users\EH2KSEI\Dev\JBossEAP71\modules" org.jboss.as.standalone -b localhost --server-config=standalone.xml -Djboss.server.base.dir=C:\Users\EH2KSEI\Dev\JBossEAP71\standalone 
+
+---JVM Argumetns ---
+
+"-Dprogram.name=JBossTools: Red Hat JBoss EAP 7.1" -server -Xms64m -Xmx512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n -Dorg.jboss.resolver.warning=true -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true "-Dorg.jboss.boot.log.file=C:\Users\EH2KSEI\Dev\JBossEAP71\standalone\log\boot.log" "-Dlogging.configuration=file:C:\Users\EH2KSEI\Dev\JBossEAP71\standalone\configuration\logging.properties" "-Djboss.home.dir=C:\Users\EH2KSEI\Dev\JBossEAP71" -Dorg.jboss.logmanager.nocolor=false -Djboss.bind.address.management=localhost 

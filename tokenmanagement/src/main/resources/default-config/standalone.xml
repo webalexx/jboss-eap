@@ -94,8 +94,8 @@
 		</access-control>
 	</management>
 	<profile>
-		<subsystem xmlns="urn:com.commerzunternahmen.tokenmanagement-subsystem:1.0">
-			<web-context>pseudo</web-context>
+		<subsystem xmlns="com.commerzunternahmen.tokenmanagement-subsystem:1.0">
+			<!-- <web-context>pseudo</web-context> -->
 			<!-- <deployment-types> <deployment-type suffix="sar" tick="10000" /> 
 				<deployment-type suffix="war" tick="10000" /> </deployment-types> -->
 		</subsystem>

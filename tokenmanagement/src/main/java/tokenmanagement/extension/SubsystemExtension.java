@@ -4,7 +4,6 @@ import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.ADD
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.SUBSYSTEM;
-import static tokenmanagement.logging.TokenManagementLogger.ROOT_LOGGER;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -28,6 +27,8 @@ import org.jboss.staxmapper.XMLElementReader;
 import org.jboss.staxmapper.XMLElementWriter;
 import org.jboss.staxmapper.XMLExtendedStreamReader;
 import org.jboss.staxmapper.XMLExtendedStreamWriter;
+
+import static tokenmanagement.logging.TokenManagementLogger.ROOT_LOGGER;
 
 /**
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
@@ -74,6 +75,7 @@ public class SubsystemExtension implements Extension {
 
 	@Override
 	public void initializeParsers(ExtensionParsingContext context) {
+		System.out.println("---------initializeParsers-----------");
 		context.setSubsystemXmlMapping(SUBSYSTEM_NAME, NAMESPACE, SUBSYS_PARSER);
 	}
 
@@ -102,6 +104,8 @@ public class SubsystemExtension implements Extension {
 		@Override
 		public void writeContent(XMLExtendedStreamWriter writer, SubsystemMarshallingContext context)
 				throws XMLStreamException {
+			
+			System.out.println("---------initializeParsers-----------");
 			context.startSubsystemElement(SubsystemExtension.NAMESPACE, false);
 			writer.writeEndElement();
 		}
@@ -112,6 +116,7 @@ public class SubsystemExtension implements Extension {
 		@Override
 		public void readElement(XMLExtendedStreamReader reader, List<ModelNode> list) throws XMLStreamException {
 			// Require no content
+			System.out.println("---------readElement-----------");
 			ParseUtils.requireNoContent(reader);
 			list.add(createAddSubsystemOperation());
 		}

@@ -65,8 +65,8 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 	 * Test that the model created from the xml looks as expected
 	 */
 	@Test
-	public void testInstallIntoController() throws Exception {
-		// Parse the subsystem xml and install into the controller
+	public void testInstallIdntoController() throws Exception {
+		// Parse the subsystem xml and install into the controller		
 		String subsystemXml = getUsedXml();
 		KernelServices services = super.createKernelServicesBuilder(null).setSubsystemXml(subsystemXml).build();
 

@@ -62,6 +62,19 @@ an example a files for automatic configuration are here :\Users\EH2KSEI\Dev\keyc
 
 /subsystem=datasources:read-resource(recursive=true)
 
+## How view RESTEASY endpoints
+
+/deployment=DEPLOYMENT_NAME/subsystem=jaxrs/restresource=
+org.jboss.as.quickstarts.rshelloworld.HelloWorld:readresource(
+include-runtime=true)
+
+
+/deployment=webservices/subsystem=jaxrs/restresource=
+org.jboss.as.quickstarts.rshelloworld.HelloWorld:readresource(
+include-runtime=true)
+
+
+
 ## WebServices and EndPoints
 
 /subsystem=webservices:read-resource

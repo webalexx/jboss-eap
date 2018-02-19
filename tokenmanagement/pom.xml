@@ -15,6 +15,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
+
 		<version.wildfly>3.0.10.Final</version.wildfly>
 		<version.jboss-logging-annotations>2.1.0.Final</version.jboss-logging-annotations>
 		<version.junit>4.12</version.junit>
@@ -27,7 +28,6 @@
 
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>dd-MM-yyyy_HH-mm-ss</maven.build.timestamp.format>
-
 		<version.war.plugin>3.2.0</version.war.plugin>
 
 	</properties>
@@ -43,7 +43,6 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
 
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name 
@@ -123,8 +122,10 @@
 								<!-- Set up a local properties -->
 								<property name="module.folder.name" value="module" />
 								<property name="subsystem.folder.name" value="subsystem" />
-								<property name="jboss.base.modules.path" value="../../../JBossEAP71/modules/system/layers/base" />
-								<property name="jboss.standalone.config.path" value="../../../JBossEAP71/standalone/configuration" />
+								<property name="jboss.base.modules.path"
+									value="../../../JBossEAP71/modules/system/layers/base" />
+								<property name="jboss.standalone.config.path"
+									value="../../../JBossEAP71/standalone/configuration" />
 
 								<!-- Replace the '.' in ${module.name} with '/' to get its path -->
 								<tempfile property="temp.file" />
@@ -150,24 +151,31 @@
 									todir="target/${subsystem.folder.name}/${module.path}/main" />
 
 								<!-- Prepare a Subsystem -->
-								<copy file="src/main/resources/${subsystem.folder.name}/module.xml"
-									tofile="target/${subsystem.folder.name}/${subsystem.path}/server-war/module.xml" />
-								<copy todir="target/${subsystem.folder.name}/${subsystem.path}/server-war/WEB-INF"
+								<copy
+									file="src/main/resources/${subsystem.folder.name}/main/module.xml"
+									tofile="target/${subsystem.folder.name}/${subsystem.path}/main/server-war/module.xml" />
+								<copy
+									todir="target/${subsystem.folder.name}/${subsystem.path}/main/server-war/WEB-INF"
 									overwrite="true" force="true">
 									<fileset dir="src/main/webapp/WEB-INF" />
 								</copy>
 
 								<!-- Delete alter folders -->
-								<chmod file="${jboss.base.modules.path}/${module.path}" perm="0777" />
-								<delete dir="${jboss.base.modules.path}/${module.path}" verbose="true" />
-								<chmod file="${jboss.base.modules.path}/${subsystem.path}" perm="0777" />
-								<delete dir="${jboss.base.modules.path}/${subsystem.path}" verbose="true" />
+								<chmod file="${jboss.base.modules.path}/${module.path}"
+									perm="0777" />
+								<delete dir="${jboss.base.modules.path}/${module.path}"
+									verbose="true" />
+								<chmod file="${jboss.base.modules.path}/${subsystem.path}"
+									perm="0777" />
+								<delete dir="${jboss.base.modules.path}/${subsystem.path}"
+									verbose="true" />
 
 								<!-- Copy to a server all from target/ folder -->
-								<copy todir="${jboss.base.modules.path}/" overwrite="true" force="true">
+								<copy todir="${jboss.base.modules.path}/" overwrite="true"
+									force="true">
 									<fileset dir="target/${subsystem.folder.name}/" />
 								</copy>
-								
+
 								<property name="jboss.standalone.replace.time" value="${maven.build.timestamp}" />
 								<move file="${jboss.standalone.config.path}/standalone.xml"
 									tofile="${jboss.standalone.config.path}/archive-standalonexml/standalone-${timestamp}.xml" />
@@ -213,8 +221,15 @@
 			<dependency>
 				<groupId>org.jboss.logging</groupId>
 				<artifactId>jboss-logging-annotations</artifactId>
-				<scope>provided</scope>
 				<version>${version.jboss-logging-annotations}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging-processor</artifactId>
+				<version>${version.jboss-logging-annotations}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
@@ -257,6 +272,13 @@
 			<groupId>org.wildfly.core</groupId>
 			<artifactId>wildfly-server</artifactId>
 		</dependency>
+		
+		 <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-web-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
 		<dependency>
 			<groupId>org.wildfly.core</groupId>
 			<artifactId>wildfly-subsystem-test</artifactId>
@@ -281,13 +303,18 @@
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging-annotations</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging-annotations</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Import the EJB API, we use provided scope as the API is included in 
 			JBoss WildFly -->
@@ -313,6 +340,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+<!-- 		<dependency>
+			<groupId>com.modules</groupId>
+			<artifactId>HelloWorldJBossModule</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency> -->
+		
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
