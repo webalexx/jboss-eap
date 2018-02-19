@@ -1,17 +1,11 @@
 package tokenmanagement.extension;
 
-import static org.keycloak.subsystem.server.extension.KeycloakExtension.SUBSYSTEM_NAME;
-
 import org.jboss.as.controller.AbstractBoottimeAddStepHandler;
 import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.server.AbstractDeploymentChainStep;
 import org.jboss.as.server.DeploymentProcessorTarget;
-import org.jboss.as.server.deployment.Phase;
 import org.jboss.dmr.ModelNode;
-import org.keycloak.subsystem.server.extension.KeycloakProviderDependencyProcessor;
-import org.keycloak.subsystem.server.extension.KeycloakProviderDeploymentProcessor;
-import org.keycloak.subsystem.server.extension.KeycloakServerDeploymentProcessor;
 
 import tokenmanagement.deployment.SubsystemDeploymentProcessor;
 
@@ -49,25 +43,25 @@ class SubsystemAdd extends AbstractBoottimeAddStepHandler {
         //Remove this if you don't need to hook into the deployers, or you can add as many as you like
         //see SubDeploymentProcessor for explanation of the phases
     	
-        context.addStep(new AbstractDeploymentChainStep() {
-            @Override
-            protected void execute(DeploymentProcessorTarget processorTarget) {
-                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME, Phase.DEPENDENCIES, 0, new ProviderDependencyProcessor());
-                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME,
-                        Phase.POST_MODULE, // PHASE
-                        Phase.POST_MODULE_VALIDATOR_FACTORY - 2, // PRIORITY
-                        new ProviderDeploymentProcessor());
-                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME,
-                        Phase.POST_MODULE, // PHASE
-                        Phase.POST_MODULE_VALIDATOR_FACTORY - 1, // PRIORITY
-                        new ServerDeploymentProcessor());
-            }
-        }, OperationContext.Stage.RUNTIME);
-        context.addStep(new AbstractDeploymentChainStep() {
-            @Override
-            protected void execute(DeploymentProcessorTarget processorTarget) {
-            }
-        }, OperationContext.Stage.RUNTIME);
+//        context.addStep(new AbstractDeploymentChainStep() {
+//            @Override
+//            protected void execute(DeploymentProcessorTarget processorTarget) {
+//                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME, Phase.DEPENDENCIES, 0, new ProviderDependencyProcessor());
+//                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME,
+//                        Phase.POST_MODULE, // PHASE
+//                        Phase.POST_MODULE_VALIDATOR_FACTORY - 2, // PRIORITY
+//                        new ProviderDeploymentProcessor());
+//                processorTarget.addDeploymentProcessor(SubsystemExtension.SUBSYSTEM_NAME,
+//                        Phase.POST_MODULE, // PHASE
+//                        Phase.POST_MODULE_VALIDATOR_FACTORY - 1, // PRIORITY
+//                        new ServerDeploymentProcessor());
+//            }
+//        }, OperationContext.Stage.RUNTIME);
+//        context.addStep(new AbstractDeploymentChainStep() {
+//            @Override
+//            protected void execute(DeploymentProcessorTarget processorTarget) {
+//            }
+//        }, OperationContext.Stage.RUNTIME);
 
         context.addStep(new AbstractDeploymentChainStep() {
             public void execute(DeploymentProcessorTarget processorTarget) {

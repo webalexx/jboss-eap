@@ -16,7 +16,10 @@
 
 	<properties>
 
-		<version.wildfly>3.0.10.Final</version.wildfly>
+		<version.wildfly>11.0.0.Final</version.wildfly>
+		<version.wildfly.server>3.1.0.Final</version.wildfly.server>
+		<version.jboss.resteasy>3.0.12.Final</version.jboss.resteasy>
+
 		<version.jboss-logging-annotations>2.1.0.Final</version.jboss-logging-annotations>
 		<version.junit>4.12</version.junit>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -97,11 +100,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${version.war.plugin}</version>
 				<configuration>
-					<!-- <archive> <manifest> <addClasspath>true</addClasspath> </manifest> 
-						<manifestEntries> <Dependencies>com.modules, org.javassist, org.apache.velocity, 
-						org.antlr meta-inf</Dependencies> </manifestEntries> </archive> -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<!-- <attachClasses>true</attachClasses> <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -120,12 +119,14 @@
 							<target>
 
 								<!-- Set up a local properties -->
+								<property name="server.base.path" value="/C:/install/JBossEAP70Runtime" />
+								<!-- <property name="server.base.path" value="../../.."/> -->
 								<property name="module.folder.name" value="module" />
 								<property name="subsystem.folder.name" value="subsystem" />
 								<property name="jboss.base.modules.path"
-									value="../../../JBossEAP71/modules/system/layers/base" />
+									value="${server.base.path}/modules/system/layers/base" />
 								<property name="jboss.standalone.config.path"
-									value="../../../JBossEAP71/standalone/configuration" />
+									value="${server.base.path}/standalone/configuration" />
 
 								<!-- Replace the '.' in ${module.name} with '/' to get its path -->
 								<tempfile property="temp.file" />
@@ -195,118 +196,76 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.wildfly.core</groupId>
-				<artifactId>wildfly-controller</artifactId>
-				<version>${version.wildfly}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.wildfly.core</groupId>
-				<artifactId>wildfly-server</artifactId>
-				<version>${version.wildfly}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.wildfly.core</groupId>
-				<artifactId>wildfly-subsystem-test</artifactId>
-				<type>pom</type>
-				<scope>test</scope>
-				<version>${version.wildfly}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-api</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.logging</groupId>
-				<artifactId>jboss-logging-annotations</artifactId>
-				<version>${version.jboss-logging-annotations}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.logging</groupId>
-				<artifactId>jboss-logging-processor</artifactId>
-				<version>${version.jboss-logging-annotations}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<scope>test</scope>
-				<version>${version.junit}</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.7.25</version>
-			</dependency>
-
-			<dependency>
 				<groupId>org.wildfly.bom</groupId>
-				<artifactId>jboss-javaee-7.0-with-tools</artifactId>
-				<version>${version.jboss.bom}</version>
+				<artifactId>wildfly-javaee7-with-tools</artifactId>
+				<version>${version.wildfly}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.wildfly.bom</groupId>
-				<artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
-				<version>${version.jboss.bom}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.wildfly.bom/wildfly-with-tools -->
+			<!-- <dependency> <groupId>org.wildfly.bom</groupId> <artifactId>wildfly-with-tools</artifactId> 
+				<version>${version.wildfly}</version> <type>pom</type> </dependency> -->
 
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.wildfly.core</groupId>
-			<artifactId>wildfly-controller</artifactId>
-		</dependency>
+
+
 		<dependency>
 			<groupId>org.wildfly.core</groupId>
 			<artifactId>wildfly-server</artifactId>
+			<version>${version.wildfly.server}</version>
 		</dependency>
-		
-		 <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-web-common</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
+		<dependency>
+			<groupId>org.wildfly.core</groupId>
+			<artifactId>wildfly-controller</artifactId>
+			<version>${version.wildfly.server}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-web-common -->
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-web-common</artifactId>
+			<version>${version.wildfly}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.wildfly.core</groupId>
 			<artifactId>wildfly-subsystem-test</artifactId>
 			<type>pom</type>
 			<scope>test</scope>
+			<version>${version.wildfly.server}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging-annotations</artifactId>
+			<version>${version.jboss-logging-annotations}</version>
+			<scope>provided</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging-processor</artifactId>
+			<version>${version.jboss-logging-annotations}</version>
+			<scope>provided</scope>
 		</dependency>
+
 
 		<!-- Import the CDI API, we use provided scope as the API is included in 
 			JBoss WildFly -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.jboss.logging</groupId>
-			<artifactId>jboss-logging-annotations</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
@@ -329,6 +288,7 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>jaxrs-api</artifactId>
+			<version>${version.jboss.resteasy}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -340,13 +300,22 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!-- 		<dependency>
-			<groupId>com.modules</groupId>
-			<artifactId>HelloWorldJBossModule</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency> -->
-		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>${version.junit}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>com.modules</groupId> <artifactId>HelloWorldJBossModule</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> <scope>provided</scope> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
