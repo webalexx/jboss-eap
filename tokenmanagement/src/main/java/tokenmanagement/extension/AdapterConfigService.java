@@ -172,7 +172,7 @@ public final class AdapterConfigService {
         return webContext;
     }
 
-    boolean isKeycloakServerDeployment(String deploymentName) {
+    boolean isTokenManagementServerDeployment(String deploymentName) {
         return DEPLOYMENT_NAME.equals(deploymentName);
     }
 }

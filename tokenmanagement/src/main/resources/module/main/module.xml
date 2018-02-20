@@ -2,7 +2,6 @@
     <resources>
         <resource-root path="tokenmanagement.jar"/>
     </resources>
-    
     <dependencies>
         <module name="javax.api"/>
         <module name="org.jboss.staxmapper"/>

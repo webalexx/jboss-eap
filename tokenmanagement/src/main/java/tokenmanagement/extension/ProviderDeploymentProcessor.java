@@ -39,7 +39,7 @@ public class ProviderDeploymentProcessor implements DeploymentUnitProcessor {
         AdapterConfigService config = AdapterConfigService.INSTANCE;
         String deploymentName = deploymentUnit.getName();
 
-        if (config.isKeycloakServerDeployment(deploymentName)) {
+        if (config.isTokenManagementServerDeployment(deploymentName)) {
             return;
         }
 

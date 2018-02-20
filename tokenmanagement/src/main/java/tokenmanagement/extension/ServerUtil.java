@@ -67,7 +67,7 @@ public class ServerUtil {
         try {
             return Module.getModuleFromCallerModuleLoader(TOKENMANAGEMENT_SUBSYSTEM);
         } catch (ModuleLoadException e) {
-            throw new IllegalStateException("Can't find Keycloak subsystem.", e);
+            throw new IllegalStateException("Can't find Tokenmanagement subsystem.", e);
         }
     }
 

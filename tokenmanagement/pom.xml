@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- parent> <groupId>org.jboss.as</groupId> <artifactId>jboss-as-parent</artifactId> 
-		</parent -->
 	<groupId> com.commerzunternahmen.frame</groupId>
 	<artifactId>tokenmanagement</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -15,7 +13,6 @@
 	<packaging>jar</packaging>
 
 	<properties>
-
 		<version.wildfly>11.0.0.Final</version.wildfly>
 		<version.wildfly.server>3.1.0.Final</version.wildfly.server>
 		<version.jboss.resteasy>3.0.12.Final</version.jboss.resteasy>
@@ -56,6 +53,15 @@
 		</filters>
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
@@ -119,8 +125,9 @@
 							<target>
 
 								<!-- Set up a local properties -->
-								<property name="server.base.path" value="/C:/install/JBossEAP70Runtime" />
-								<!-- <property name="server.base.path" value="../../.."/> -->
+								<!-- <property name="server.base.path" value="/C:/install/JBossEAP70Runtime" 
+									/> -->
+								<property name="server.base.path" value="../../../JBossEAP71" />
 								<property name="module.folder.name" value="module" />
 								<property name="subsystem.folder.name" value="subsystem" />
 								<property name="jboss.base.modules.path"
@@ -206,7 +213,7 @@
 			<!-- https://mvnrepository.com/artifact/org.wildfly.bom/wildfly-with-tools -->
 			<!-- <dependency> <groupId>org.wildfly.bom</groupId> <artifactId>wildfly-with-tools</artifactId> 
 				<version>${version.wildfly}</version> <type>pom</type> </dependency> -->
- 
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -218,11 +225,8 @@
 			<artifactId>wildfly-server</artifactId>
 			<version>${version.wildfly.server}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.wildfly.core</groupId>
-			<artifactId>wildfly-controller</artifactId>
-			<version>${version.wildfly.server}</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.wildfly.core</groupId> <artifactId>wildfly-controller</artifactId> 
+			<version>${version.wildfly.server}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-web-common -->
 		<dependency>
@@ -230,6 +234,12 @@
 			<artifactId>wildfly-web-common</artifactId>
 			<version>${version.wildfly}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.wildfly.core</groupId>
+					<artifactId>wildfly-controller</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -242,6 +252,10 @@
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.wildfly.core</groupId>
+					<artifactId>wildfly-controller</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -290,6 +304,12 @@
 			<artifactId>jaxrs-api</artifactId>
 			<version>${version.jboss.resteasy}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.1.4.Final</version>
 		</dependency>
 
 		<!-- Import the Common Annotations API (JSR-250), we use provided scope 

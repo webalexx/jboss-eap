@@ -55,7 +55,7 @@ public class ServerDeploymentProcessor implements DeploymentUnitProcessor {
         AdapterConfigService configService = AdapterConfigService.INSTANCE;
         String deploymentName = deploymentUnit.getName();
 
-        if (!configService.isKeycloakServerDeployment(deploymentName)) {
+        if (!configService.isTokenManagementServerDeployment(deploymentName)) {
             return;
         }
 

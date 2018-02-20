@@ -17,7 +17,15 @@ bin/add-user.bat -u "admin" -p "admin123!" -g "guest,mgmtgroup"
 
 ## Stop/Start a Server
 
+## Start JBoss Eap in a debug mode
 
+### Variant 1
+
+standalone.bat --debug 9797
+
+### Variant 2
+
+to add jvm_optons: -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=8787, server=y, suspend=n
 
 # How to install Subsystem
 
@@ -105,4 +113,5 @@ Start point a Keycloak deployment shema
         
 ## Install subsystema 
 /subsystem=keycloak-server:add(web-context=auth,master-realm-name=master,scheduled-task-interval=900)
-    	 
+
+

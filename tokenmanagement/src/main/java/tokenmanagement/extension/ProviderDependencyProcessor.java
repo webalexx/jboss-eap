@@ -39,11 +39,11 @@ import org.jboss.vfs.util.AbstractVirtualFileFilterWithAttributes;
  * @version $Revision: 1 $
  */
 public class ProviderDependencyProcessor implements DeploymentUnitProcessor {
-    private static final ModuleIdentifier KEYCLOAK_COMMON = ModuleIdentifier.create("org.keycloak.keycloak-common");
-    private static final ModuleIdentifier KEYCLOAK_CORE = ModuleIdentifier.create("org.keycloak.keycloak-core");
-    private static final ModuleIdentifier KEYCLOAK_SERVER_SPI = ModuleIdentifier.create("org.keycloak.keycloak-server-spi");
-    private static final ModuleIdentifier KEYCLOAK_SERVER_SPI_PRIVATE = ModuleIdentifier.create("org.keycloak.keycloak-server-spi-private");
-    private static final ModuleIdentifier KEYCLOAK_JPA = ModuleIdentifier.create("org.keycloak.keycloak-model-jpa");
+    private static final ModuleIdentifier TOKENMANAGEMENT_REST = ModuleIdentifier.create("com.commerzunternahmen.tokenmanagement-module");
+//    private static final ModuleIdentifier KEYCLOAK_CORE = ModuleIdentifier.create("org.keycloak.keycloak-core");
+//    private static final ModuleIdentifier KEYCLOAK_SERVER_SPI = ModuleIdentifier.create("org.keycloak.keycloak-server-spi");
+//    private static final ModuleIdentifier KEYCLOAK_SERVER_SPI_PRIVATE = ModuleIdentifier.create("org.keycloak.keycloak-server-spi-private");
+//    private static final ModuleIdentifier KEYCLOAK_JPA = ModuleIdentifier.create("org.keycloak.keycloak-model-jpa");
     private static final ModuleIdentifier JAXRS = ModuleIdentifier.create("javax.ws.rs.api");
     private static final ModuleIdentifier RESTEASY = ModuleIdentifier.create("org.jboss.resteasy.resteasy-jaxrs");
     private static final ModuleIdentifier APACHE = ModuleIdentifier.create("org.apache.httpcomponents");
@@ -52,11 +52,13 @@ public class ProviderDependencyProcessor implements DeploymentUnitProcessor {
 
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {
+    	
+    	System.out.println("---- ProviderDependencyProcessor.deploy ----");
         DeploymentUnit deploymentUnit = phaseContext.getDeploymentUnit();
         AdapterConfigService config = AdapterConfigService.INSTANCE;
         String deploymentName = deploymentUnit.getName();
 
-        if (config.isKeycloakServerDeployment(deploymentName)) {
+        if (config.isTokenManagementServerDeployment(deploymentName)) {
             return;
         }
 
@@ -64,14 +66,14 @@ public class ProviderDependencyProcessor implements DeploymentUnitProcessor {
 
         final ModuleSpecification moduleSpecification = deploymentUnit.getAttachment(Attachments.MODULE_SPECIFICATION);
         final ModuleLoader moduleLoader = Module.getBootModuleLoader();
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_COMMON, false, false, false, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_CORE, false, false, false, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_SERVER_SPI, false, false, false, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_SERVER_SPI_PRIVATE, false, false, false, false));
+        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, TOKENMANAGEMENT_REST, false, false, false, false));
+//        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_CORE, false, false, false, false));
+//        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_SERVER_SPI, false, false, false, false));
+//        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_SERVER_SPI_PRIVATE, false, false, false, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, JAXRS, false, false, false, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, RESTEASY, false, false, false, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, APACHE, false, false, false, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_JPA, false, false, false, false));
+//        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, KEYCLOAK_JPA, false, false, false, false));
 
 
     }
@@ -95,7 +97,7 @@ public class ProviderDependencyProcessor implements DeploymentUnitProcessor {
             List<VirtualFile> archives = services.getChildren(new AbstractVirtualFileFilterWithAttributes(){
                 @Override
                 public boolean accepts(VirtualFile file) {
-                    return file.getName().startsWith("org.keycloak");
+                    return file.getName().startsWith("com.commerzunternahmen");
                 }
             });
             return !archives.isEmpty();

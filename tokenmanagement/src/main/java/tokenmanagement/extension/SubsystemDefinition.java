@@ -1,12 +1,15 @@
 package tokenmanagement.extension;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jboss.as.controller.AttributeDefinition;
 import org.jboss.as.controller.SimpleAttributeDefinition;
 import org.jboss.as.controller.SimpleAttributeDefinitionBuilder;
 import org.jboss.as.controller.SimpleResourceDefinition;
+import org.jboss.as.controller.operations.common.GenericSubsystemDescribeHandler;
 import org.jboss.as.controller.registry.ManagementResourceRegistration;
 import org.jboss.dmr.ModelNode;
 import org.jboss.dmr.ModelType;
@@ -19,7 +22,7 @@ public class SubsystemDefinition extends SimpleResourceDefinition {
     public static final SubsystemDefinition INSTANCE = new SubsystemDefinition();
     
     private SubsystemDefinition() {
-    	super(SubsystemExtension.SUBSYSTEM_PATH,
+    	super(SubsystemExtension.PATH_SUBSYSTEM,
                 SubsystemExtension.getResourceDescriptionResolver(null),
                 //We always need to add an 'add' operation
                 SubsystemAdd.INSTANCE,
@@ -30,31 +33,41 @@ public class SubsystemDefinition extends SimpleResourceDefinition {
     static final SimpleAttributeDefinition WEB_CONTEXT =
             new SimpleAttributeDefinitionBuilder("web-context", ModelType.STRING, true)
                 .setAllowExpression(true)
-                .setDefaultValue(new ModelNode("banan"))
+                .setDefaultValue(new ModelNode("pseudo"))
                 .setRestartAllServices()
                 .build();
 
     @Override
     public void registerOperations(ManagementResourceRegistration resourceRegistration) {
         super.registerOperations(resourceRegistration);
-        //you can register aditional operations here
+        System.out.println("---------registerOperations-----------");
+        resourceRegistration.registerOperationHandler(GenericSubsystemDescribeHandler.DEFINITION, GenericSubsystemDescribeHandler.INSTANCE);
     }
 
     static final List<AttributeDefinition> ALL_ATTRIBUTES = new ArrayList<AttributeDefinition>();
-
     static {
         ALL_ATTRIBUTES.add(WEB_CONTEXT);
-//        ALL_ATTRIBUTES.add(PROVIDERS);
+    }
+    
+    private static final Map<String, AttributeDefinition> DEFINITION_LOOKUP = new HashMap<String, AttributeDefinition>();
+    static {
+        for (AttributeDefinition def : ALL_ATTRIBUTES) {
+            DEFINITION_LOOKUP.put(def.getXmlName(), def);
+        }
     }
     
     private static SubsystemWriteAttributeHandler attrHandler = new SubsystemWriteAttributeHandler(ALL_ATTRIBUTES);
     
     @Override
     public void registerAttributes(ManagementResourceRegistration resourceRegistration) {
-        //you can register attributes here
+    	System.out.println("---------registerAttributes-----------");
     	   super.registerAttributes(resourceRegistration);
            for (AttributeDefinition attrDef : ALL_ATTRIBUTES) {
                resourceRegistration.registerReadWriteAttribute(attrDef, null, attrHandler);
            }
+    }
+    
+    public static AttributeDefinition lookup(String name) {
+        return DEFINITION_LOOKUP.get(name);
     }
 }
