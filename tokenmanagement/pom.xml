@@ -206,7 +206,7 @@
 			<!-- https://mvnrepository.com/artifact/org.wildfly.bom/wildfly-with-tools -->
 			<!-- <dependency> <groupId>org.wildfly.bom</groupId> <artifactId>wildfly-with-tools</artifactId> 
 				<version>${version.wildfly}</version> <type>pom</type> </dependency> -->
-
+ 
 		</dependencies>
 	</dependencyManagement>
 
