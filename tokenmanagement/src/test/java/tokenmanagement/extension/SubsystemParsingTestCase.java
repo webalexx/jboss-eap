@@ -40,12 +40,12 @@ import tokenmanagement.common.PropertiesReader;
  */
 public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 
-	private PropertiesReader properties;
+	//private PropertiesReader properties;
 	private static Weld weld;
 	
-//	@Inject
-//	@PropertiesFromFile("sdfsdf")
-//	Properties appProperties;
+	@Inject
+	@PropertiesFromFile
+	PropertiesReader appProperties;
 //
 //	@BeforeClass
 //	public static void setupClass() {
@@ -59,11 +59,10 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 //	public static void teardownClass() {
 //		weld.shutdown();
 //	}
-	
-	
 
 	public SubsystemParsingTestCase() {
 		super(SubsystemExtension.SUBSYSTEM_NAME, (Extension) new SubsystemExtension());
+		String str=appProperties.getProperty("sdfds");
 	}
 
 	@Test

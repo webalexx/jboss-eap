@@ -5,18 +5,21 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import org.jboss.weld.context.ejb.Ejb;
+
 
 /*
  * class to read a properties from configs on a class path
  */
-
+@PropertiesFromFile
+@Stateless
 public class PropertiesReader extends Properties {
 
 	private Properties properties;
+	
+	
 	
 	@Produces
 	@PropertiesFromFile
