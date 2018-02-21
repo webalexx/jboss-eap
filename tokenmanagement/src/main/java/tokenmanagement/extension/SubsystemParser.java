@@ -16,29 +16,24 @@
  */
 package tokenmanagement.extension;
 
+import static tokenmanagement.extension.SubsystemDefinition.WEB_CONTEXT;
+import static tokenmanagement.extension.SubsystemExtension.PATH_SUBSYSTEM;
+
+import java.util.List;
+
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+
 import org.jboss.as.controller.AttributeDefinition;
 import org.jboss.as.controller.PathAddress;
-import org.jboss.as.controller.PathElement;
-import org.jboss.as.controller.PropertiesAttributeDefinition;
-import org.jboss.as.controller.SimpleAttributeDefinition;
-import org.jboss.as.controller.descriptions.ModelDescriptionConstants;
 import org.jboss.as.controller.operations.common.Util;
 import org.jboss.as.controller.parsing.ParseUtils;
 import org.jboss.as.controller.persistence.SubsystemMarshallingContext;
 import org.jboss.dmr.ModelNode;
-import org.jboss.dmr.Property;
 import org.jboss.staxmapper.XMLElementReader;
 import org.jboss.staxmapper.XMLElementWriter;
 import org.jboss.staxmapper.XMLExtendedStreamReader;
 import org.jboss.staxmapper.XMLExtendedStreamWriter;
-
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import java.util.List;
-
-import static tokenmanagement.extension.SubsystemExtension.PATH_SUBSYSTEM;
-import static org.keycloak.subsystem.server.extension.KeycloakSubsystemDefinition.PROVIDERS;
-import static tokenmanagement.extension.SubsystemDefinition.WEB_CONTEXT;
 
 /**
  * The subsystem parser, which uses stax to read and write to and from xml
@@ -73,7 +68,7 @@ class SubsystemParser implements XMLStreamConstants, XMLElementReader<List<Model
     	System.out.println("--- writeContent ---");
         context.startSubsystemElement(SubsystemExtension.NAMESPACE, false);
         writeWebContext(writer, context);
-        writeList(writer, context.getModelNode(), PROVIDERS, "provider");
+//        writeList(writer, context.getModelNode(), PROVIDERS, "provider");
         writer.writeEndElement();
     }
     

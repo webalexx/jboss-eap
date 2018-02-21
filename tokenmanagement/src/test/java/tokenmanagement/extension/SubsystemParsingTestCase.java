@@ -8,6 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
+
+import javax.inject.Inject;
 
 import org.jboss.as.controller.Extension;
 import org.jboss.as.controller.PathAddress;
@@ -15,8 +18,15 @@ import org.jboss.as.controller.PathElement;
 import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
 import org.jboss.as.subsystem.test.KernelServices;
 import org.jboss.dmr.ModelNode;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import tokenmanagement.common.PropertiesFromFile;
+import tokenmanagement.common.PropertiesReader;
 
 /**
  * Tests all management expects for subsystem, parsing, marshaling, model
@@ -29,6 +39,28 @@ import org.junit.Test;
  * @author A.Karpachev
  */
 public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
+
+	private PropertiesReader properties;
+	private static Weld weld;
+	
+//	@Inject
+//	@PropertiesFromFile("sdfsdf")
+//	Properties appProperties;
+//
+//	@BeforeClass
+//	public static void setupClass() {
+//		weld = new Weld();
+//		try (WeldContainer container = new Weld().initialize()) {
+//			container.select(PropertiesReader.class).get();
+//		}
+//	}
+//
+//	@AfterClass
+//	public static void teardownClass() {
+//		weld.shutdown();
+//	}
+	
+	
 
 	public SubsystemParsingTestCase() {
 		super(SubsystemExtension.SUBSYSTEM_NAME, (Extension) new SubsystemExtension());
@@ -66,7 +98,7 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 	 */
 	@Test
 	public void testInstallIntoController() throws Exception {
-		// Parse the subsystem xml and install into the controller		
+		// Parse the subsystem xml and install into the controller
 		String subsystemXml = getUsedXml();
 		KernelServices services = super.createKernelServicesBuilder(null).setSubsystemXml(subsystemXml).build();
 
@@ -114,18 +146,20 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 
 	@Override
 	protected String getSubsystemXml() throws IOException {
+		// return "<subsystem
+		// xmlns\='urn\:com\.commerzunternahmen.tokenmanagement-subsystem\:1.0'><web-context>pseudo</web-context></subsystem>\u0000";
 		return readResource("tokenmanagement.xml");
 	}
 
 	protected String getUsedXml() throws Exception {
-//	Variant 2	return getGeneratedXmlForVeriefication() + "</subsystem>";
+		// Variant 2 return getGeneratedXmlForVeriefication() + "</subsystem>";
 		return getSubsystemXml();
 	}
-	
+
 	private String getGeneratedXmlForVeriefication() {
 		return "<subsystem xmlns=\"" + SubsystemExtension.NAMESPACE + "\">";
 	}
-	
+
 	@Override
 	protected String getSubsystemXsdPath() throws Exception {
 		return "schema/tokenmanagement.xsd";

@@ -5,6 +5,10 @@ import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.SUBSYSTEM;
 
+import java.util.Properties;
+
+import javax.inject.Inject;
+
 import org.jboss.as.controller.Extension;
 import org.jboss.as.controller.ExtensionContext;
 import org.jboss.as.controller.ModelVersion;
@@ -15,11 +19,21 @@ import org.jboss.as.controller.parsing.ExtensionParsingContext;
 import org.jboss.as.controller.registry.ManagementResourceRegistration;
 import org.jboss.dmr.ModelNode;
 
+import tokenmanagement.common.PropertiesFromFile;
+import tokenmanagement.common.PropertiesReader;
+
 /**
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  */
 public class SubsystemExtension implements Extension {
+	
+	
+//	@Inject
+//	@PropertiesFromFile("")
+//	Properties appProperties;
+//	private PropertiesReader properties = new PropertiesReader();
 
+	
 	public static final String SUBSYSTEM_NAME = "tokenmanagement-subsystem";
 	public static final String NAMESPACE = "urn:com.commerzunternahmen.tokenmanagement-subsystem:1.0";
 	private static final ModelVersion MGMT_API_VERSION = ModelVersion.create(1, 0, 0);
@@ -43,6 +57,10 @@ public class SubsystemExtension implements Extension {
 
 	@Override
 	public void initializeParsers(ExtensionParsingContext context) {
+		
+//		String srt =appProperties.getProperty("endpoint.rest.port");
+		
+//		String endpoint = properties.getProperties().getProperty("endpoint.rest.port");
 		System.out.println("---------initializeParsers-----------");
 		 context.setSubsystemXmlMapping(SUBSYSTEM_NAME, NAMESPACE, PARSER);
 	}
