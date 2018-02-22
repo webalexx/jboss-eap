@@ -8,9 +8,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
-
-import javax.inject.Inject;
 
 import org.jboss.as.controller.Extension;
 import org.jboss.as.controller.PathAddress;
@@ -18,55 +15,36 @@ import org.jboss.as.controller.PathElement;
 import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
 import org.jboss.as.subsystem.test.KernelServices;
 import org.jboss.dmr.ModelNode;
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
-import org.junit.AfterClass;
+import org.jboss.weld.junit5.WeldJunit5Extension;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import tokenmanagement.common.PropertiesFromFile;
-import tokenmanagement.common.PropertiesReader;
-
-/**
- * Tests all management expects for subsystem, parsing, marshaling, model
- * definition and other Here is an example that allows you a fine grained
- * controler over what is tested and how. So it can give you ideas what can be
- * done and tested. If you have no need for advanced testing of subsystem you
- * look at {@link SubsystemBaseParsingTestCase} that testes same stuff but most
- * of the code is hidden inside of test harness
- *
- * @author A.Karpachev
+/*
+ * https://github.com/weld/weld-junit/blob/master/junit5/README.md
+ * https://www.novatec-gmbh.de/uploads/media/JavaSpektrum_Bean_Testing_2013.pdf
+ * https://junit.org/junit5/docs/current/user-guide/
+ * 
  */
-public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 
-	//private PropertiesReader properties;
-	private static Weld weld;
+//@RunWith(CdiRunner.class)
+//@RunWith(WeldJUnit4Runner.class)
+@ExtendWith(WeldJunit5Extension.class)
+class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 	
-	@Inject
-	@PropertiesFromFile
-	PropertiesReader appProperties;
-//
-//	@BeforeClass
-//	public static void setupClass() {
-//		weld = new Weld();
-//		try (WeldContainer container = new Weld().initialize()) {
-//			container.select(PropertiesReader.class).get();
-//		}
-//	}
-//
-//	@AfterClass
-//	public static void teardownClass() {
-//		weld.shutdown();
-//	}
+	
 
-	public SubsystemParsingTestCase() {
-		super(SubsystemExtension.SUBSYSTEM_NAME, (Extension) new SubsystemExtension());
-		String str=appProperties.getProperty("sdfds");
+	public SubsystemParsingTestCase(String mainSubsystemName, Extension mainExtension) {
+		super(mainSubsystemName, mainExtension);
 	}
+
+//	@Inject
+//	@AppProperties(name = "subsystem.rest.root")
+//	public static String SUBSYSTEM_ROOT1;
 
 	@Test
 	public void testXmlVerification() throws Exception {
+//		String s = SUBSYSTEM_ROOT1;
 		assertTrue(getSubsystemXml().contains(getGeneratedXmlForVeriefication()));
 	}
 
@@ -78,10 +56,8 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 		// Parse the subsystem xml into operations
 		String subsystemXml = getUsedXml();
 		List<ModelNode> operations = super.parse(subsystemXml);
-
 		/// Check that we have the expected number of operations
 		Assert.assertEquals(1, operations.size());
-
 		// Check that each operation has the correct content
 		ModelNode addSubsystem = operations.get(0);
 		Assert.assertEquals(ADD, addSubsystem.get(OP).asString());
@@ -134,24 +110,18 @@ public class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
 	@Test
 	public void testSubsystemRemoval() throws Exception {
 		// Parse the subsystem xml and install into the first controller
-
 		String subsystemXml = getUsedXml();
 		KernelServices services = super.createKernelServicesBuilder(null).setSubsystemXml(subsystemXml).build();
 		// Checks that the subsystem was removed from the model
 		super.assertRemoveSubsystemResources(services);
-
-		// TODO Chek that any services that were installed were removed here
 	}
 
 	@Override
 	protected String getSubsystemXml() throws IOException {
-		// return "<subsystem
-		// xmlns\='urn\:com\.commerzunternahmen.tokenmanagement-subsystem\:1.0'><web-context>pseudo</web-context></subsystem>\u0000";
 		return readResource("tokenmanagement.xml");
 	}
 
 	protected String getUsedXml() throws Exception {
-		// Variant 2 return getGeneratedXmlForVeriefication() + "</subsystem>";
 		return getSubsystemXml();
 	}
 

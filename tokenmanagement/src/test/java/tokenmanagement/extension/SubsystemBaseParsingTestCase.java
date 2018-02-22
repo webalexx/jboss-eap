@@ -1,9 +1,8 @@
 package tokenmanagement.extension;
 
-import org.jboss.as.controller.Extension;
-import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
-
 import java.io.IOException;
+
+import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
 
 /**
  * This is the bare bones test example that tests subsystem It does same things

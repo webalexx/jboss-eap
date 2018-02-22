@@ -1,47 +1,36 @@
 package tokenmanagement.extension;
 
-import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
 import java.io.IOException;
-import java.util.Properties;
 
-/**
- * Tests all management expects for subsystem, parsing, marshaling, model
- * definition and other Here is an example that allows you a fine grained
- * controller over what is tested and how. So it can give you ideas what can be
- * done and tested. If you have no need for advanced testing of subsystem you
- * look at {@link AbstractSubsystemBaseTest} that testes same stuff but most of
- * the code is hidden inside of test harness
- *
- * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
- * @author Tomaz Cerar
- * @author Marko Strukelj
- */
+import org.jboss.as.controller.Extension;
+import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
+import org.jboss.weld.junit5.WeldJunit5Extension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(WeldJunit5Extension.class)
 public class SubsystemParsingTestCase2 extends AbstractSubsystemBaseTest {
+	
+	
 
-	public SubsystemParsingTestCase2() {
-		super(SubsystemExtension.SUBSYSTEM_NAME, new SubsystemExtension());
+	public SubsystemParsingTestCase2(String mainSubsystemName, Extension mainExtension) {
+		super(mainSubsystemName, mainExtension);
 	}
 
-	@Override
-	protected Properties getResolvedProperties() {
-		Properties properties = new Properties();
-		properties.put("jboss.home.dir", System.getProperty("java.io.tmpdir"));
-		properties.put("keycloak.jta.lookup.provider", "jboss");
-		return properties;
+//	@Inject
+//	@AppProperties(name = "subsystem.rest.root")
+//	public static String SUBSYSTEM_ROOT1;
+
+	@Test
+	public void testXmlVerification() throws Exception {
+//		String s = SUBSYSTEM_ROOT1;
+		String s = "";
 	}
 
 	@Override
 	protected String getSubsystemXml() throws IOException {
-		return readResource("tokenmanagement.xml");
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	protected String getSubsystemXsdPath() throws Exception {
-		return "schema/tokenmanagement.xsd";
-	}
-
-	@Override
-	protected String[] getSubsystemTemplatePaths() throws IOException {
-		return new String[] { "/schema/tokenmanagement.xml" };
-	}
 }
