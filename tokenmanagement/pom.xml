@@ -78,7 +78,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -358,10 +357,10 @@
 		<!-- <dependency> <groupId>org.jboss.weld.se</groupId> <artifactId>weld-se</artifactId> 
 			<version>2.4.6.Final</version> </dependency> -->
 
-      	<dependency>
-         <groupId>org.jboss.spec.javax.ejb</groupId>
-         <artifactId>jboss-ejb-api_3.2_spec</artifactId>
-      </dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -374,39 +373,39 @@
 			<artifactId>weld-junit5</artifactId>
 			<version>${version.jboss.weld.junit5}</version>
 		</dependency>
-		
-               <!-- https://mvnrepository.com/artifact/org.wildfly.arquillian/wildfly-arquillian-container-managed -->
-<dependency>
-    <groupId>org.wildfly.arquillian</groupId>
-    <artifactId>wildfly-arquillian-container-managed</artifactId>
-    <version>2.1.0.Final</version>
-    <scope>test</scope>
-</dependency>
 
-<dependency>
-                    <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-weld-embedded</artifactId>
-                    <version>2.0.0.Beta4</version>
-                    <scope>test</scope>
-                </dependency>
-                
-                <dependency>
+		<!-- https://mvnrepository.com/artifact/org.wildfly.arquillian/wildfly-arquillian-container-managed -->
+		<dependency>
+			<groupId>org.wildfly.arquillian</groupId>
+			<artifactId>wildfly-arquillian-container-managed</artifactId>
+			<version>2.1.0.Final</version>
+			<scope>test</scope>
+		</dependency>
 
- <groupId>org.glassfish.extras</groupId>
- <artifactId>glassfish-embedded-all</artifactId>
- <version>3.1</version>
- <scope>test</scope>
- </dependency>
- 
-<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-weld -->
-<dependency>
-    <groupId>info.cukes</groupId>
-    <artifactId>cucumber-weld</artifactId>
-    <version>1.2.5</version>
-    <scope>test</scope>
-</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-weld-embedded</artifactId>
+			<version>2.0.0.Beta4</version>
+			<scope>test</scope>
+		</dependency>
 
-               
+		<dependency>
+
+			<groupId>org.glassfish.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>3.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-weld -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-weld</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-launcher</artifactId>
@@ -414,13 +413,13 @@
 			<scope>test</scope>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
-<dependency>
-    <groupId>javax.enterprise</groupId>
-    <artifactId>cdi-api</artifactId>
-    <version>2.0</version>
-    <scope>provided</scope>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 
 	</dependencies>

@@ -18,8 +18,7 @@ public class SubsystemParsingTestCase2 {
 	 @Inject
 	 @AppProperties(name = "subsystem.rest.root")
 	 public static String SUBSYSTEM_ROOT1;
-	
-	
+		
 	/*@WeldSetup
 	public WeldInitiator weld = WeldInitiator.from(AppPropertiesServiceImpl.class)
 			.activate(RequestScoped.class, SessionScoped.class).build();*/

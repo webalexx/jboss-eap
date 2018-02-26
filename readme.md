@@ -52,7 +52,7 @@ bin/standalone.bat --server-config=standalone-keycloak.xml
 
 # Run and test 
 
-mvn install -Dmaven.test.skip=true
+mvn install -Pdev -Dmaven.test.skip=true  -DprofileIdEnabled=true
 
 # Jboss-cli 
 
@@ -67,7 +67,7 @@ C:\Users\EH2KSEI\Dev\keycloak-demo-3.4.3.Final\keycloak\modules\system\layers\ke
 an example a files for automatic configuration are here :\Users\EH2KSEI\Dev\keycloak-343Final-Official\wildfly\server-subsystem\src\main\resources\subsystem-templates\keycloak-server.xml
 
 ## Sample how to read recources
-
+jboss-cli.bat --connect
 /subsystem=datasources:read-resource(recursive=true)
 
 ## How view RESTEASY endpoints
