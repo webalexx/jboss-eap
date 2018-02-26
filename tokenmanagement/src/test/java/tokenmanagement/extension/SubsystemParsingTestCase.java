@@ -4,6 +4,7 @@ import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.ADD
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.SUBSYSTEM;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * https://github.com/weld/weld-junit/blob/master/junit5/README.md
  * https://www.novatec-gmbh.de/uploads/media/JavaSpektrum_Bean_Testing_2013.pdf
  * https://junit.org/junit5/docs/current/user-guide/
+ * patching wildfly with http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/
  * 
  */
 
@@ -31,20 +33,23 @@ import org.junit.jupiter.api.extension.ExtendWith;
 //@RunWith(WeldJUnit4Runner.class)
 @ExtendWith(WeldJunit5Extension.class)
 class SubsystemParsingTestCase extends AbstractSubsystemBaseTest {
-	
-	
 
 	public SubsystemParsingTestCase(String mainSubsystemName, Extension mainExtension) {
 		super(mainSubsystemName, mainExtension);
 	}
 
-//	@Inject
-//	@AppProperties(name = "subsystem.rest.root")
-//	public static String SUBSYSTEM_ROOT1;
+	// @Inject
+	// @AppProperties(name = "subsystem.rest.root")
+	// public static String SUBSYSTEM_ROOT1;
+
+	@Test
+	void myFirstTest() {
+		assertEquals(2, 1 + 1);
+	}
 
 	@Test
 	public void testXmlVerification() throws Exception {
-//		String s = SUBSYSTEM_ROOT1;
+		// String s = SUBSYSTEM_ROOT1;
 		assertTrue(getSubsystemXml().contains(getGeneratedXmlForVeriefication()));
 	}
 

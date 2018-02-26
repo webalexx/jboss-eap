@@ -1,0 +1,16 @@
+
+ysquid:CommentedOutCodeLine%"<This block of commented-out lines of code should be removed.(ÑŸäþHÉÈRMAJORZ
+CODE_SMELL
+tsquid:S1075"ARefactor your code to get this URI from a customizable parameter.(ÁäÍ¯ûÿÿÿÿHÆÈRMINORZ
+CODE_SMELL
+ysquid:CommentedOutCodeLine,"<This block of commented-out lines of code should be removed.(¶—Á»HÅÈRMAJORZ
+CODE_SMELL
+ysquid:CommentedOutCodeLine?"<This block of commented-out lines of code should be removed.(ï–úHÈÈRMAJORZ
+CODE_SMELL
+k
+squid:S106B"9Replace this use of System.out or System.err by a logger.(•Ê‰»ýÿÿÿÿHÇÈRMAJORZ
+CODE_SMELL
+~squid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(éØ»ÚûÿÿÿÿHÄÈRMAJORZ
+CODE_SMELL
+~squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(›ˆÎÒýÿÿÿÿHÊÈRMAJORZ
+CODE_SMELL

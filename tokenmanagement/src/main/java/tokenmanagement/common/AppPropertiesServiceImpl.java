@@ -5,22 +5,22 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 
 /*
  * class to read a properties from configs on a class path
  */
-public class AppPropertiesServiceImpl implements AppPropertiesService{
+public class AppPropertiesServiceImpl {
 
 	private Properties properties;
 	private String configPath = "/config/application.properties"; 
 	
-	@Produces
+	public AppPropertiesServiceImpl() {
+		super();
+	}
+
 	@AppProperties
-	@Override
 	public String produceProperties(final InjectionPoint propName) {
 		return  this.properties.getProperty(getNameKey(propName));
 	}

@@ -3,6 +3,7 @@ package tokenmanagement.common;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
@@ -15,7 +16,7 @@ import javax.inject.Qualifier;
 @Documented
 @Qualifier
 @Retention(RUNTIME)
-@Target({ FIELD, TYPE, METHOD })
+@Target({ FIELD, TYPE, METHOD, CONSTRUCTOR })
 public @interface AppProperties {
 
 	/**
@@ -24,8 +25,8 @@ public @interface AppProperties {
 	@Nonbinding
 	String name() default "";
 
-//	/**
-//	 * This value must be a properties file in the classpath.
-//	 */
-//	String path() default "/config/application.properties";
+	// /**
+	// * This value must be a properties file in the classpath.
+	// */
+	// String path() default "/config/application.properties";
 }

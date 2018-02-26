@@ -1,0 +1,7 @@
+
+Ésquid:S3776]"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(È∞ÄµHÙ¿RCRITICALZ
+CODE_SMELL
+—%squid:RedundantThrowsDeclarationCheckö"áRemove the declaration of thrown exception 'org.junit.jupiter.api.extension.ParameterResolutionException' which is a runtime exception.(Û«ùÃHÛ¿RMINORZ
+CODE_SMELL
+÷%squid:RedundantThrowsDeclarationCheckè"áRemove the declaration of thrown exception 'org.junit.jupiter.api.extension.ParameterResolutionException' which is a runtime exception.( ÄóÃ¸ˇˇˇˇHÚ¿RMINORZ
+CODE_SMELL

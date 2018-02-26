@@ -14,11 +14,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-	<!-- <servlet>
-		<servlet-name>javax.ws.rs.core.Application</servlet-name>
-	</servlet> -->
-<!-- 	<servlet-mapping>
-		<servlet-name>javax.ws.rs.core.Application</servlet-name>
-		<url-pattern>/pseudo/*</url-pattern>
-	</servlet-mapping> -->
+	<!-- <servlet> <servlet-name>javax.ws.rs.core.Application</servlet-name> 
+		</servlet> -->
+	<!-- <servlet-mapping> <servlet-name>javax.ws.rs.core.Application</servlet-name> 
+		<url-pattern>/pseudo/*</url-pattern> </servlet-mapping> -->
 </web-app>

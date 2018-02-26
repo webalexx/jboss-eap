@@ -1,36 +1,42 @@
 package tokenmanagement.extension;
 
-import java.io.IOException;
+import javax.inject.Inject;
 
-import org.jboss.as.controller.Extension;
-import org.jboss.as.subsystem.test.AbstractSubsystemBaseTest;
 import org.jboss.weld.junit5.WeldJunit5Extension;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import tokenmanagement.common.AppProperties;
+
 @ExtendWith(WeldJunit5Extension.class)
-public class SubsystemParsingTestCase2 extends AbstractSubsystemBaseTest {
-	
-	
+public class SubsystemParsingTestCase2 {
 
-	public SubsystemParsingTestCase2(String mainSubsystemName, Extension mainExtension) {
-		super(mainSubsystemName, mainExtension);
+	
+	 
+	 @Inject
+	 @AppProperties(name = "subsystem.rest.root")
+	 public static String SUBSYSTEM_ROOT1;
+	
+	
+	/*@WeldSetup
+	public WeldInitiator weld = WeldInitiator.from(AppPropertiesServiceImpl.class)
+			.activate(RequestScoped.class, SessionScoped.class).build();*/
+
+	@BeforeEach
+	void initTest() {
+		
 	}
-
-//	@Inject
-//	@AppProperties(name = "subsystem.rest.root")
-//	public static String SUBSYSTEM_ROOT1;
-
+	
+	@AfterEach
+	void finishTest() {
+		
+	}
+	
 	@Test
 	public void testXmlVerification() throws Exception {
-//		String s = SUBSYSTEM_ROOT1;
-		String s = "";
-	}
-
-	@Override
-	protected String getSubsystemXml() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+	String s = SUBSYSTEM_ROOT1;
 	}
 
 }

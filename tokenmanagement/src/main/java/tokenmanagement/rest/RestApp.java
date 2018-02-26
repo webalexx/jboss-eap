@@ -9,6 +9,10 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
+
+/*
+ * https://developer.jboss.org/thread/223578
+ */
 @ApplicationPath("${subsystem.rest.root}")
 public class RestApp extends Application {
 
